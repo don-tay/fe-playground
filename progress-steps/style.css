@@ -87,6 +87,18 @@ body {
 
 .circle.active {
   border-color: var(--line-border-fill);
+  color: var(--line-border-fill);
+  animation-name: color-change;
+  animation-duration: 2s;
+}
+
+@keyframes color-change {
+  from {
+    color: goldenrod;
+  }
+  to {
+    color: var(--line-border-fill);
+  }
 }
 
 .btn {
