@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Muli&display=swap');
+
+:root {
+  --line-border-fill: #3498db;
+  --line-border-empty: #e0e0e0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f6f7fb;
+  font-family: 'Muli', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+}
+
+.container {
+  text-align: center;
+}
+
+.progress-container {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 30px;
+  max-width: 100%;
+  width: 350px;
+}
+
+/* white line on progress bar */
+.progress-container::before {
+  /* required when using ::before CSS prop */
+  content: '';
+  background-color: var(--line-border-empty);
+  position: absolute;
+  /* set to middle y-position of its parent container */
+  top: 50%;
+  left: 0;
+  /* fine tune y-axis to align with middle of number */
+  transform: translateY(-50%);
+  /* 'line' thickness */
+  height: 4px;
+  /* 'line' length */
+  width: 100%;
+  /* so that line is sent to back */
+  z-index: -1;
+}
+
+/* blue line on progress bar */
+.progress {
+  background-color: var(--line-border-fill);
+  position: absolute;
+  /* set to middle y-position of its parent container */
+  top: 50%;
+  left: 0;
+  /* fine tune y-axis to align with middle of number */
+  transform: translateY(-50%);
+  /* 'line' thickness */
+  height: 4px;
+  /* 'line' length */
+  width: 0%;
+  /* so that line is sent to back */
+  z-index: -1;
+  transition: 0.4s ease;
+}
+
+/* progress circle */
+.circle {
+  background-color: #fff;
+  color: #999;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  /* center number in middle of circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--line-border-empty);
+  transition: 0.4s ease;
+}
+
+.circle.active {
+  border-color: var(--line-border-fill);
+}
+
+.btn {
+  background-color: var(--line-border-fill);
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  /* adjust btn size */
+  padding: 8px 30px;
+  /* adjust space between buttons */
+  margin: 5px;
+  font-size: 14px;
+}
+
+/* when btn is clicked */
+.btn:not(:disabled):active {
+  transform: scale(0.9);
+}
+
+.btn:focus {
+  outline: 0;
+}
+
+.btn:disabled {
+  background-color: var(--line-border-empty);
+  cursor: not-allowed;
+}
