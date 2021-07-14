@@ -20,6 +20,11 @@ prev.addEventListener('click', () => {
 
 const updateCircleAndBar = () => {
   circles.forEach((circle, idx) => {
+    if (idx === currentActive - 1 && currentActive !== 1) {
+      circle.classList.add('last');
+    } else {
+      circle.classList.remove('last');
+    }
     if (idx < currentActive) {
       circle.classList.add('active');
     } else {

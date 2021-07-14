@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Muli&display=swap');
 
 :root {
-  --line-border-fill: #3498db;
+  --line-border-fill: #3db2ff;
   --line-border-empty: #e0e0e0;
 }
 
@@ -88,23 +88,29 @@ body {
 .circle.active {
   border-color: var(--line-border-fill);
   color: var(--line-border-fill);
+}
+
+.circle.active.last {
+  border-color: gold;
+  color: goldenrod;
+  transform: scale(1.5);
   animation-name: color-change;
-  animation-duration: 2s;
+  animation-duration: 1s;
 }
 
 @keyframes color-change {
   from {
-    color: goldenrod;
+    color: yellow;
   }
   to {
-    color: var(--line-border-fill);
+    color: goldenrod;
   }
 }
 
 .circle.active.final {
-  border-color: gold;
-  color: goldenrod;
-  animation-name: initial;
+  border-color: lime;
+  color: limegreen;
+  animation: none;
 }
 
 .btn {
