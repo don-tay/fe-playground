@@ -101,6 +101,12 @@ body {
   }
 }
 
+.circle.active.final {
+  border-color: gold;
+  color: goldenrod;
+  animation-name: initial;
+}
+
 .btn {
   background-color: var(--line-border-fill);
   color: #fff;
