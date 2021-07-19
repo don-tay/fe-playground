@@ -1,6 +1,7 @@
 const boxes = document.querySelectorAll('.box');
 
 window.addEventListener('scroll', checkBoxes);
+window.addEventListener('resize', checkBoxes);
 
 function checkBoxes() {
   const triggerBtm = (window.innerHeight / 5) * 4;
