@@ -9,6 +9,7 @@ const DEFAULT_IMG =
 const main = document.getElementById('main');
 const form = document.getElementById('form');
 const search = document.getElementById('search');
+const header = document.getElementById('header');
 
 getMovies(API_URL);
 
@@ -78,3 +79,12 @@ form.addEventListener(
     }
   }, 300)
 );
+
+// add sticky header
+document.addEventListener('scroll', () => {
+  if (window.pageYOffset > header.offsetTop) {
+    header.classList.add('sticky');
+  } else {
+    header.classList.remove('sticky');
+  }
+});
