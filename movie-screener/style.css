@@ -120,6 +120,10 @@ main {
   transition: transform 0.3s ease-in;
 }
 
+.overview span {
+  line-height: 2rem;
+}
+
 .movie:hover .overview {
   /* slide movie overview box upwards when hover over movie container */
   transform: translateY(0);

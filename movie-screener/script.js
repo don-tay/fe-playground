@@ -21,7 +21,14 @@ async function getMovies(url) {
 function showMovies(movies) {
   main.innerHTML = '';
   movies.forEach(movie => {
-    const { title, poster_path, vote_average, overview } = movie;
+    const {
+      title,
+      poster_path,
+      vote_average,
+      overview,
+      popularity,
+      release_date,
+    } = movie;
 
     const movieElem = document.createElement('div');
     const imgSrc = poster_path ? IMG_PATH + poster_path : DEFAULT_IMG;
@@ -36,6 +43,8 @@ function showMovies(movies) {
             <span class=${getClassByRating(vote_average)}>${vote_average}</span>
         </div>
         <div class="overview">
+            <span>Released: <b>${release_date}</b></span>
+            <span>Popularity Score: <b>${popularity}</b></span>
             <h3>Overview</h3>
             ${overview}
         </div>
@@ -79,6 +88,11 @@ form.addEventListener(
     }
   }, 300)
 );
+
+// disable form from being submitted (since keyup event is used)
+form.addEventListener('submit', e => {
+  e.preventDefault();
+});
 
 // add sticky header
 document.addEventListener('scroll', () => {
