@@ -7,7 +7,8 @@ toggles.forEach(toggle =>
 );
 
 function updateCheckboxes(clickedCheckbox) {
-  clickedCheckbox.checked && checkedArr.push(clickedCheckbox);
+  (clickedCheckbox.checked && checkedArr.push(clickedCheckbox)) ||
+    checkedArr.splice(checkedArr.indexOf(clickedCheckbox), 1);
   if (checkedArr.length < 3) {
     return;
   }
