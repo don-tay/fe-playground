@@ -5,6 +5,33 @@
 }
 
 body {
+  background-color: blanchedalmond;
   font-family: 'Open Sans', sans-serif;
-  overflow: hidden;
+  overflow-x: hidden;
+  padding: 0.5rem;
+}
+
+h1 {
+  color: saddlebrown;
+}
+
+.container {
+  background-color: lightyellow;
+  border-radius: 10px;
+  padding: 0.5rem;
+}
+
+.container ol li {
+  font-size: 1.2rem;
+  padding-bottom: 0.5rem;
+  color: black;
+}
+
+.container ol li a {
+  text-decoration: none;
+  color: steelblue;
+}
+
+.container ol li a:hover {
+  text-decoration: underline;
 }
