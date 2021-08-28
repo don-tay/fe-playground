@@ -26,7 +26,7 @@ nextBtn.addEventListener('click', () => {
 
 function resetInterval() {
   clearInterval(autoShiftInt);
-  setTimeout(() => (autoShiftInt = setInterval(shiftImgLeft, 2000)), 5000);
+  autoShiftInt = setInterval(shiftImgLeft, 2000);
 }
 
 function shiftImgLeft() {
