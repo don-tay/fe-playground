@@ -10,16 +10,22 @@ for (i = 0; i < NUM_SQUARES_IN_ROW; ++i) {
     const square = document.createElement('div');
     square.classList.add('square');
     square.addEventListener('mouseover', e => {
-      changeColour(e.target);
+      changeColor(e.target);
+    });
+    square.addEventListener('mouseleave', e => {
+      removeColor(e.target);
     });
     container.appendChild(square);
   }
 }
 
-function changeColour(sq) {
+function changeColor(sq) {
   const color = colors[Math.floor(Math.random() * colors.length)];
   sq.style.backgroundColor = color;
   sq.style.boxShadow = `0 0 2px ${color}, 0 0 10px ${color}`;
+}
+
+function removeColor(sq) {
   setTimeout(() => (sq.style.backgroundColor = DEFAULT_SQUARE_COLOUR), 1000);
   setTimeout(() => (sq.style.boxShadow = DEFAULT_SQUARE_OUTLINE), 2000);
 }
