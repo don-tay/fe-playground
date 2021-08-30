@@ -6,7 +6,6 @@ const circles = document.querySelectorAll('.circle');
 let currentActive = 1;
 
 next.addEventListener('click', () => {
-  console.log('clicked');
   currentActive = Math.min(++currentActive, circles.length);
   updateCircleAndBar();
   updateBtn();
