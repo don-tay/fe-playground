@@ -62,4 +62,9 @@ h1 {
 .pokemon .info .name {
   margin: 15px 0 7px;
   letter-spacing: 1px;
+  text-transform: capitalize;
+}
+
+.pokemon .info small span {
+  text-transform: capitalize;
 }
