@@ -40,7 +40,12 @@ const generateBtn = async () => {
     btn.classList.add('btn');
     btn.style.backgroundColor = colorArr[idx];
     btn.innerText = `Gen ${gen}`;
-    btn.addEventListener('click', () => fetchPokemonByGen(gen));
+    btn.addEventListener('click', () => {
+      const genBtns = document.querySelectorAll('#gen-container .btn');
+      genBtns.forEach(btn => btn.classList.remove('active'));
+      btn.classList.add('active');
+      fetchPokemonByGen(gen);
+    });
     genContainer.appendChild(btn);
   });
 };
