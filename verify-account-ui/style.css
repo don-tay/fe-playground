@@ -40,6 +40,9 @@ body {
   margin: 1%;
   text-align: center;
   font-weight: 300;
+  outline: none;
+  justify-content: center;
+  align-items: center;
 }
 
 /* remove number arrows from webkit based browsers */
@@ -51,17 +54,18 @@ body {
   margin: 0;
 }
 
+.code:focus {
+  scale: 1.15;
+  border-color: blue;
+}
+
 .code:valid {
   border-color: #3498db;
   box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.25);
 }
 
 .code.invalid {
-  outline: 2px solid red;
-}
-
-.code.invalid:focus {
-  scale: 1.1;
+  border: 2px solid red;
 }
 
 .info {
