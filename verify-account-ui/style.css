@@ -12,7 +12,7 @@ body {
   justify-content: center;
   height: 100vh;
   overflow: hidden;
-  margin: 0;
+  margin: 5px;
 }
 
 .container {
@@ -48,6 +48,7 @@ body {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  margin: 0;
 }
 
 .code:valid {
