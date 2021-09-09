@@ -22,6 +22,24 @@ body {
   padding: 30px;
   max-width: 1000px;
   text-align: center;
+  transition: all 0.5s ease;
+}
+
+.container.success {
+  border-color: limegreen;
+}
+
+#success-msg {
+  color: green;
+  font-weight: bold;
+  font-size: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+}
+
+#success-msg.show {
+  font-size: 1.4em;
+  visibility: visible;
 }
 
 .code-container {
@@ -43,6 +61,11 @@ body {
   outline: none;
   justify-content: center;
   align-items: center;
+}
+
+/* code outline if container is marked as success */
+.container.success .code {
+  border-color: green;
 }
 
 /* remove number arrows from webkit based browsers */
