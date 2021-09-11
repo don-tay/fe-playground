@@ -1,7 +1,10 @@
+const searchInput = document.getElementById('search-input');
 const pokeContainer = document.getElementById('poke-container');
 const genContainer = document.getElementById('gen-container');
 
 const DEFAULT_POKEMON_COUNT = 150;
+let POKEMON_NAMES_AND_URL = [];
+
 const POKEMON_URL = `https://pokeapi.co/api/v2/pokemon`;
 const GEN_URL = `https://pokeapi.co/api/v2/generation`;
 
@@ -23,6 +26,51 @@ const colors = {
 };
 
 const colorArr = Object.values(colors);
+
+const debounce = (func, delay) => {
+  let debounceTimer;
+  return function () {
+    const context = this;
+    const args = arguments;
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => func.apply(context, args), delay);
+  };
+};
+
+searchInput.addEventListener(
+  'input',
+  debounce(async e => {
+    pokeContainer.innerHTML = '';
+    const searchTerm = e.target.value.toLowerCase().trim();
+    if (!searchTerm) {
+      return fetchPokemons();
+    }
+    const filteredResults = POKEMON_NAMES_AND_URL.filter(({ name }) =>
+      name.includes(searchTerm)
+    );
+    const pokeIdArr = filteredResults
+      .map(
+        ({ url }) =>
+          url
+            .split('/')
+            .filter(str => str !== '')
+            .reverse()[0]
+      )
+      .sort((a, b) => a - b);
+    for (const pokeId of pokeIdArr) {
+      await getPokemon(pokeId);
+    }
+  }, 600)
+);
+
+const getPokemonNameAndUrl = async () => {
+  const res = await fetch(POKEMON_URL);
+  const { count } = await res.json();
+  const url = `${POKEMON_URL}?limit=${count}`;
+  const res2 = await fetch(url);
+  const { results } = await res2.json();
+  POKEMON_NAMES_AND_URL = results;
+};
 
 const generateBtn = async () => {
   const reqUrl = `${GEN_URL}`;
@@ -109,6 +157,6 @@ const createCardHtml = data => {
   `;
   pokeContainer.appendChild(pokemonHtml);
 };
-
+getPokemonNameAndUrl();
 generateBtn();
 fetchPokemons();
