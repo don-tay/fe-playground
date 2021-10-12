@@ -46,6 +46,7 @@ body {
   line-height: 28px;
   /* space out full-line text to fit line */
   text-align: justify;
+  margin: 1em;
 }
 
 .user {
