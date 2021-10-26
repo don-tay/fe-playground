@@ -1,15 +1,15 @@
 const container = document.querySelector('.container');
-const UNSPLASH_URL = 'https://source.unsplash.com/random/';
+const PIC_URL = 'https://picsum.photos/';
 const NUM_ROWS = 10;
 
 for (let i = 0; i < NUM_ROWS * 3; ++i) {
   const img = document.createElement('img');
-  img.src = `${UNSPLASH_URL}${getRandomSize()}`;
+  img.src = `${PIC_URL}${getRandomSize()}`;
   container.appendChild(img);
 }
 
 function getRandomSize() {
-  return `${getRandomNum()}x${getRandomNum()}`;
+  return `${getRandomNum()}/${getRandomNum()}`;
 }
 
 function getRandomNum() {
