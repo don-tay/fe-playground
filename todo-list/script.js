@@ -2,13 +2,17 @@ const form = document.getElementById('form');
 const input = document.getElementById('input');
 const todosEl = document.getElementById('todos');
 
-loadFromStorage();
+initTodo();
 
-form.addEventListener('submit', e => {
-  e.preventDefault();
+function initTodo() {
+  const todos = JSON.parse(localStorage.getItem('todos')) ?? [];
+  todos.forEach(todo => addTodo(todo));
 
-  addTodo(e.target);
-});
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    addTodo(e.target);
+  });
+}
 
 function addTodo(todo) {
   const todoText = todo?.text ?? input.value;
@@ -24,21 +28,34 @@ function addTodo(todo) {
   todoEl.innerText = todoText;
 
   // add event listener to the created element
-  todoEl.addEventListener('click', () => todoEl.classList.toggle('completed'));
+  todoEl.addEventListener('click', () => {
+    todoEl.classList.toggle('completed');
+    updateStorage();
+  });
 
   todoEl.addEventListener('contextmenu', e => {
     // prevent native context menu from appearing on right click
     e.preventDefault();
 
     todoEl.remove();
+    updateStorage();
   });
 
   todosEl.appendChild(todoEl);
 
   input.value = '';
+
+  updateStorage();
 }
 
-function loadFromStorage() {
-  const listItems = localStorage.getItem('listItems');
-  listItems?.forEach(item => {});
+function updateStorage() {
+  const todosEl = document.querySelectorAll('li');
+  const todos = [];
+  todosEl.forEach(todoEl => {
+    todos.push({
+      text: todoEl.innerText,
+      completed: todoEl.classList.contains('completed'),
+    });
+  });
+  localStorage.setItem('todos', JSON.stringify(todos));
 }
