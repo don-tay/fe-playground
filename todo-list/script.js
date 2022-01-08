@@ -1,6 +1,7 @@
 const form = document.getElementById('form');
 const input = document.getElementById('input');
 const todosEl = document.getElementById('todos');
+const clearBtn = document.getElementById('clear-btn');
 
 initTodo();
 
@@ -11,6 +12,11 @@ function initTodo() {
   form.addEventListener('submit', e => {
     e.preventDefault();
     addTodo(e.target);
+  });
+
+  clearBtn.addEventListener('click', () => {
+    todosEl.innerHTML = '';
+    updateStorageAndBtn();
   });
 }
 
@@ -30,7 +36,7 @@ function addTodo(todo) {
   // add event listener to the created element
   todoEl.addEventListener('click', () => {
     todoEl.classList.toggle('completed');
-    updateStorage();
+    updateStorageAndBtn();
   });
 
   todoEl.addEventListener('contextmenu', e => {
@@ -38,17 +44,17 @@ function addTodo(todo) {
     e.preventDefault();
 
     todoEl.remove();
-    updateStorage();
+    updateStorageAndBtn();
   });
 
   todosEl.appendChild(todoEl);
 
   input.value = '';
 
-  updateStorage();
+  updateStorageAndBtn();
 }
 
-function updateStorage() {
+function updateStorageAndBtn() {
   const todosEl = document.querySelectorAll('li');
   const todos = [];
   todosEl.forEach(todoEl => {
@@ -58,4 +64,7 @@ function updateStorage() {
     });
   });
   localStorage.setItem('todos', JSON.stringify(todos));
+
+  // disable button if no todo in list
+  clearBtn.disabled = todos.length === 0;
 }
