@@ -2,6 +2,7 @@ const ratings = document.querySelectorAll('.rating');
 const ratingsContainer = document.querySelector('.ratings-container');
 const sendBtn = document.getElementById('send');
 const panel = document.getElementById('panel');
+const credits = document.getElementById('credits');
 
 let selectedRating = 'Satisfied';
 
@@ -11,11 +12,12 @@ ratingsContainer.addEventListener('click', e => {
     e.target.parentElement.classList.contains('rating')
   ) {
     removeActive();
-    (e.target.classList.contains('rating') &&
-      e.target.classList.add('active')) ||
-      (e.target.parentElement.classList.contains('rating') &&
-        e.target.parentElement.classList.add('active'));
-    selectedRating = e.target.nextElementSibling.innerText;
+    const selectedElem = e.target.classList.contains('rating')
+      ? e.target
+      : e.target.parentElement;
+    selectedElem.classList.contains('rating') &&
+      selectedElem.classList.add('active');
+    selectedRating = selectedElem.innerText;
   }
 });
 
@@ -27,6 +29,8 @@ sendBtn.addEventListener('click', e => {
     <strong>Feedback: ${selectedRating}</strong>
     <p>Your feedback will help us to improve our app!</p>
   `;
+
+  credits.style.display = 'none';
 });
 
 const removeActive = () => {
