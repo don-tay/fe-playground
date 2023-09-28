@@ -11,8 +11,6 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  overflow: hidden;
   margin: 0;
 }
 
@@ -22,6 +20,45 @@ h3 {
   text-align: center;
   white-space: nowrap;
   line-height: 1.5em;
+}
+
+#cta-btn {
+  background-color: #f0932b;
+  color: #fff;
+}
+
+#clear-btn {
+  background-color: #fff;
+  color: #2b88f0;
+}
+
+#error-msg {
+  color: #fff;
+  margin: 0 0 20px;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 1.5em;
+}
+
+.btn {
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 50%;
+  margin: 0 5px;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 20px;
+  width: 100%;
+}
+
+.btn:hover {
+  scale: 1.02
 }
 
 .container {

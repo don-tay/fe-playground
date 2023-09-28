@@ -14,10 +14,20 @@
   <body>
     <div class="container">
       <h3>
-        Enter all of your choices, separated by a comma (','). <br />Press
-        'Enter' when you are done.
+        Input choice and frequency (delimited by ,). <br />
+        Format: <br />
+        choice1,frequency1<br />
+        choice2,frequency2<br />
       </h3>
-      <textarea placeholder="Enter choices here..." id="textarea"></textarea>
+      <textarea placeholder="Enter choice and frequency" id="textarea"></textarea>
+
+      <span id="error-msg"></span>
+
+      <!-- container with flex -->
+      <div class="btn-container">
+        <button id="cta-btn" class="btn">Pick a choice!</button>
+        <button id="clear-btn" class="btn">Clear</button>
+      </div>
 
       <div id="tags"></div>
     </div>

@@ -1,19 +1,28 @@
 const tagsElem = document.getElementById('tags');
 const textarea = document.getElementById('textarea');
+const ctaBtn = document.getElementById('cta-btn');
+const clearBtn = document.getElementById('clear-btn');
+const errorSpan = document.getElementById('error-msg');
+
+let errorMsgs = [];
+let tagCount = 0;
 
 textarea.focus();
 
-textarea.addEventListener('keyup', e => {
-  createTags(e.target.value);
+ctaBtn.addEventListener('click', () => {
+  clearError();
+  // create tags from input
+  createTags(textarea.value);
+  showError();
+  randomSelect();
+});
 
-  // execute random select of tags when 'Enter' key is hit
-  if (e.key === 'Enter') {
-    // clear textarea input when hit 'Enter' key
-    setTimeout(() => {
-      e.target.value = '';
-    }, 10);
-    randomSelect();
-  }
+clearBtn.addEventListener('click', () => {
+  tagsElem.innerHTML = '';
+  textarea.value = '';
+  textarea.focus();
+  clearError();
+  tagCount = 0;
 });
 
 /**
@@ -21,19 +30,48 @@ textarea.addEventListener('keyup', e => {
  * @param {string} input
  */
 function createTags(input) {
-  const tagsText = input
-    .split(',')
+  // input should be tuples of (choice, frequency)
+  // each tuple separated by newline
+  const tagFreqTupleStr = input
+    .split('\n')
     .map(tag => tag.trim())
     .filter(tag => tag !== '');
 
   tagsElem.innerHTML = '';
 
-  tagsText.forEach(tagText => {
+  if (tagFreqTupleStr.length === 0) {
+    errorMsgs.push('No input provided.');
+    return;
+  }
+
+  const invalidFreqTags = [];
+
+  const tagsArr = tagFreqTupleStr.reduce((acc, tagFreq) => {
+    const [tag, freq] = tagFreq.split(',', 2);
+    let freqVal = parseInt(freq);
+    if (isNaN(freqVal)) {
+      invalidFreqTags.push(tag);
+      freqVal = 1; // default freq = 1
+    }
+    for (let i = 0; i < freqVal; i++) {
+      acc.push(tag);
+    }
+    return acc;
+  }
+  , []).sort(() => 0.5 - Math.random());
+  
+  tagsArr.forEach(tag => {
     const tagElem = document.createElement('span');
     tagElem.classList.add('tag');
-    tagElem.innerText = tagText;
+    tagElem.innerText = tag;
     tagsElem.appendChild(tagElem);
   });
+
+  tagCount = tagsArr.length;
+
+  if (invalidFreqTags.length > 0) {
+    errorMsgs.push(`Invalid frequency provided for ${invalidFreqTags.join(', ')}. Default to 1.`);
+  }
 }
 
 function randomSelect() {
@@ -55,6 +93,9 @@ function randomSelect() {
     setTimeout(() => {
       const randomTag = pickRandomTag();
       highlightTag(randomTag);
+      if (tagCount > 100) {
+        alert(`Selected: ${randomTag.innerText}`);
+      }
     }, INTERVAL_DURATION);
   }, INTERVAL_TIMES * INTERVAL_DURATION);
 }
@@ -66,9 +107,20 @@ function pickRandomTag() {
 }
 
 function highlightTag(tag) {
-  tag.classList.add('highlight');
+  tag?.classList.add('highlight');
 }
 
 function unHighlightTag(tag) {
-  tag.classList.remove('highlight');
+  tag?.classList.remove('highlight');
+}
+
+function showError() {
+  if (errorMsgs.length) {
+    errorSpan.innerText = errorMsgs.join('\n');
+  }
+}
+
+function clearError() {
+  errorSpan.innerText = '';
+  errorMsgs = [];
 }
